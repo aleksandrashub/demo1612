@@ -1,0 +1,157 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        x:Class="shubenok1212.AddNew"
+        Title="AddNew">
+	<Grid
+	   ColumnDefinitions="300,200, 200"
+	   RowDefinitions="40,*">
+		<StackPanel
+			Grid.Row="0"
+			Grid.Column="0">
+			<Button
+				Click="nazad_Click"
+				Content="Вернуться к каталогу">
+			</Button>
+		</StackPanel>
+		<StackPanel
+			Grid.Column="0"
+			Grid.Row="1">
+			<StackPanel
+				Orientation="Horizontal">
+				<TextBlock
+					Text="id ">
+				</TextBlock>
+				<TextBlock
+					Name="idTx">
+				</TextBlock>
+			</StackPanel>
+
+			<TextBlock
+			Text="Наименование">
+			</TextBlock>
+			<TextBox
+				Height="70"
+				Width="200"
+				Name="nameTx">
+			</TextBox>
+			<TextBlock
+				Text="Стоимость">
+			</TextBlock>
+			<TextBox
+					Width="200"
+					Name="costTx">
+			</TextBox>
+
+			<TextBlock
+				Text="Описание">
+			</TextBlock>
+			<TextBox
+				Height="100"
+					Width="200"
+					Name="descrTx">
+			</TextBox>
+			<TextBlock
+				Text="Производитель">
+			</TextBlock>
+			<ComboBox
+				Name="manCb">
+			</ComboBox>
+			<CheckBox
+				IsCheckedChanged="CheckBox_IsCheckedChanged_1"
+				Name="actCh">
+				Активен
+			</CheckBox>
+			<Button
+				Click="Ok_Click"
+				Content="Готово">
+			</Button>
+		</StackPanel>
+		<StackPanel
+			HorizontalAlignment="Left"
+			Grid.Column="1">
+			<TextBlock
+				Margin="0,55,0,0"
+				TextWrapping="Wrap"
+				Width="200"
+				HorizontalAlignment="Left"
+				Text="Текущие связанные товары">
+			</TextBlock>
+			<ListBox
+				Height="300"
+				Width="200"
+				SelectionChanged="CurrPrListBox_SelectionChanged"
+				Name="currdopList">
+				<ListBox.ItemTemplate>
+					<DataTemplate
+						x:CompileBindings="False">
+						<ScrollViewer>
+							<Grid>
+								<StackPanel
+									Orientation="Vertical">
+									<TextBlock
+										Text="{Binding IdPr}">
+									</TextBlock>
+									<TextBlock
+										Text="{Binding Name}">
+									</TextBlock>
+									<TextBlock
+										Text="{Binding Cost}">
+									</TextBlock>
+								</StackPanel>
+							</Grid>
+						</ScrollViewer>
+					</DataTemplate>
+				</ListBox.ItemTemplate>
+			</ListBox>
+		</StackPanel>
+		<StackPanel
+			Grid.Row="1"
+			Grid.Column="2">
+			<TextBlock
+					   TextWrapping="Wrap"
+					   Width="200"
+					   HorizontalAlignment="Left"
+					   Text="Добавление новых связанных товаров">
+			</TextBlock>
+			<ListBox
+				Height="300"
+				Width="200"
+				SelectionChanged="newDopListBox_SelectionChanged"
+				Name="newdopList">
+				<ListBox.ItemTemplate>
+					<DataTemplate
+						x:CompileBindings="False">
+						<ScrollViewer>
+							<Grid>
+								<StackPanel
+									Orientation="Vertical">
+									<TextBlock
+										Text="{Binding IdPr}">
+									</TextBlock>
+									<TextBlock
+										Text="{Binding Name}">
+									</TextBlock>
+									<TextBlock
+										Text="{Binding Cost}">
+									</TextBlock>
+								</StackPanel>
+							</Grid>
+						</ScrollViewer>
+					</DataTemplate>
+				</ListBox.ItemTemplate>
+			</ListBox>
+
+			<Button
+				Click="img_Click"
+				Content="Добавить изображение">
+			</Button>
+			<Image
+				Name="img">
+			</Image>
+		</StackPanel>
+
+	</Grid>
+</Window>

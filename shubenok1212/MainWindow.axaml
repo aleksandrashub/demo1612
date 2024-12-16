@@ -1,0 +1,147 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        x:Class="shubenok1212.MainWindow"
+        Title="shubenok1212">
+    <Grid
+	   ColumnDefinitions="200,200,200,*"
+	   RowDefinitions="100,600,*">
+	   <StackPanel
+		   Grid.Column="0"
+		   Grid.Row="0">
+		   
+		   <Button
+			   Click="Button_Click"
+			  Content="Добавить новый товар">
+		   </Button>
+		   <TextBlock
+			   Text="Фильтрация">
+		   </TextBlock>
+		   <ComboBox
+			   SelectionChanged="filter_SelectionChanged"
+			   Name="manufCb">
+			   </ComboBox>
+		  
+		   
+		   </StackPanel>
+	   <StackPanel
+		   Grid.Column="1"
+		   Grid.Row="0">
+		   <TextBlock
+			   Text="Сортировка">
+		   </TextBlock>
+		   <ComboBox
+			   SelectionChanged="sort_SelectionChanged"
+			   Name=" costCb">
+			   <ComboBoxItem>
+				   Сортировка по убыванию стоимости
+			   </ComboBoxItem>
+		   <ComboBoxItem>
+			   Сортировка по возрастанию стоимости
+		   </ComboBoxItem>
+		   </ComboBox>
+		   </StackPanel>
+	   <StackPanel
+		  Grid.Column="2"
+		  Grid.Row="0">
+		   <TextBlock
+			   Text="Поиск">
+		   </TextBlock>
+		  <TextBox
+			  KeyUp="TextBox_KeyUp"
+			  Name="textbox">
+			  
+			  </TextBox>
+	   </StackPanel>
+	   <StackPanel
+		   Orientation="Horizontal"
+		   Grid.Row="1"
+		   Grid.ColumnSpan="3"
+		   Grid.Column="0">
+			<ListBox
+				VerticalAlignment="Top"
+				Height="500"
+				Width="1000"
+				Name="listbox">
+				<ListBox.ItemsPanel>
+					<ItemsPanelTemplate>
+						<WrapPanel
+							Width="1000">
+						</WrapPanel>
+					</ItemsPanelTemplate>
+					</ListBox.ItemsPanel>
+					<ListBox.ItemTemplate>
+						<DataTemplate
+							x:CompileBindings="False">
+							<ScrollViewer>
+							<Grid
+								Height="300"
+								Width="300"
+								Background="{Binding color}"
+								RowDefinitions="200,100">
+								<StackPanel
+									Orientation="Vertical">
+									<StackPanel
+										VerticalAlignment="Center"
+										HorizontalAlignment="Center"
+										Grid.Row="0">
+										<Image
+											VerticalAlignment="Center"
+											Height="150"
+											Width="150"
+											Source="{Binding bitm}">
+										</Image>
+									</StackPanel>
+									<StackPanel
+										Orientation="Vertical"
+										Grid.Row="1">
+										<TextBlock
+											HorizontalAlignment="Center"
+											Height="50"
+											TextWrapping="Wrap"
+											Text="{Binding Name}">
+											</TextBlock>
+										<StackPanel
+											HorizontalAlignment="Center"
+											Orientation="Horizontal">
+										<TextBlock
+											Text="{Binding Cost}"
+											Height="30">
+											</TextBlock>
+											<TextBlock
+												Text=" рублей">
+												</TextBlock>
+											
+										</StackPanel>
+										<TextBlock
+											HorizontalAlignment="Center"
+											Text="{Binding activ}">
+
+										</TextBlock>
+										<Button
+											Tag="{Binding IdProd}"
+											Click="delButton_Click"
+											Content="Удалить"
+											HorizontalAlignment="Center">
+											</Button>
+										<Button
+											Tag="{Binding IdProd}"
+											Click="editButton_Click"
+											Content="Редактировать"
+											HorizontalAlignment="Center">
+										</Button>
+									</StackPanel>
+									</StackPanel>
+								</Grid>
+								</ScrollViewer>
+							</DataTemplate>
+					</ListBox.ItemTemplate>
+			</ListBox>
+				
+		   
+		   </StackPanel>
+	   
+	   </Grid>
+</Window>

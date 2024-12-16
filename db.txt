@@ -1,0 +1,111 @@
+-- DROP SCHEMA books;
+
+CREATE SCHEMA books AUTHORIZATION user11037;
+-- books.activity определение
+
+-- Drop table
+
+-- DROP TABLE books.activity;
+
+CREATE TABLE books.activity (
+	id_activ int4 NOT NULL,
+	"name" varchar NULL,
+	CONSTRAINT activity_pk PRIMARY KEY (id_activ)
+);
+
+-- Permissions
+
+ALTER TABLE books.activity OWNER TO user11037;
+GRANT ALL ON TABLE books.activity TO user11037;
+
+
+-- books.manuf определение
+
+-- Drop table
+
+-- DROP TABLE books.manuf;
+
+CREATE TABLE books.manuf (
+	id_manuf int4 NOT NULL,
+	"name" varchar NULL,
+	CONSTRAINT manuf_pk PRIMARY KEY (id_manuf)
+);
+
+-- Permissions
+
+ALTER TABLE books.manuf OWNER TO user11037;
+GRANT ALL ON TABLE books.manuf TO user11037;
+
+
+-- books.prods определение
+
+-- Drop table
+
+-- DROP TABLE books.prods;
+
+CREATE TABLE books.prods (
+	id_prod int4 NOT NULL,
+	"name" varchar NULL,
+	"cost" float4 NULL,
+	id_activ int4 NULL,
+	image varchar NULL,
+	id_manuf int4 NULL,
+	descr varchar NULL,
+	CONSTRAINT prods_pk PRIMARY KEY (id_prod),
+	CONSTRAINT prods_activity_fk FOREIGN KEY (id_activ) REFERENCES books.activity(id_activ),
+	CONSTRAINT prods_manuf_fk FOREIGN KEY (id_manuf) REFERENCES books.manuf(id_manuf)
+);
+
+-- Permissions
+
+ALTER TABLE books.prods OWNER TO user11037;
+GRANT ALL ON TABLE books.prods TO user11037;
+
+
+-- books.sale определение
+
+-- Drop table
+
+-- DROP TABLE books.sale;
+
+CREATE TABLE books.sale (
+	id_sale int4 NOT NULL,
+	"date" date NULL,
+	id_prod int4 NULL,
+	amount int4 NULL,
+	"time" time NULL,
+	CONSTRAINT sale_pk PRIMARY KEY (id_sale),
+	CONSTRAINT sale_prods_fk FOREIGN KEY (id_prod) REFERENCES books.prods(id_prod)
+);
+
+-- Permissions
+
+ALTER TABLE books.sale OWNER TO user11037;
+GRANT ALL ON TABLE books.sale TO user11037;
+
+
+-- books.dop_prod определение
+
+-- Drop table
+
+-- DROP TABLE books.dop_prod;
+
+CREATE TABLE books.dop_prod (
+	id_main int4 NOT NULL,
+	id_dop int4 NOT NULL,
+	CONSTRAINT dop_prod_pk PRIMARY KEY (id_main, id_dop),
+	CONSTRAINT dop_prod_prods_fk FOREIGN KEY (id_main) REFERENCES books.prods(id_prod),
+	CONSTRAINT dop_prod_prods_fk_1 FOREIGN KEY (id_dop) REFERENCES books.prods(id_prod)
+);
+
+-- Permissions
+
+ALTER TABLE books.dop_prod OWNER TO user11037;
+GRANT ALL ON TABLE books.dop_prod TO user11037;
+
+
+
+
+-- Permissions
+
+GRANT ALL ON SCHEMA books TO user11037;
